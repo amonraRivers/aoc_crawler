@@ -2,12 +2,13 @@ use reqwest::{self, header::HeaderValue};
 use std::fs;
 use std::io::{BufWriter, Read, Write};
 fn main() {
-    let client = reqwest::blocking::Client::new();
-    let base_url = String::from("https://adventofcode.com/2021/day/");
+    let year = "2022";
     let day = "1";
+    let client = reqwest::blocking::Client::new();
+    let base_url = String::from("https://adventofcode.com/") + year + "/day/";
     let origin_url = base_url + day + "/input";
     let mut headers = reqwest::header::HeaderMap::new();
-    let cookie="_ga=GA1.2.2064259430.1669580633; _gid=GA1.2.379236820.1669580633; session=53616c7465645f5f6461ca7ca6488e83e8ebaad6a16c9d41bcd38fd091cfde66041bab5e4f1d7d1e32fb7d94794f3995d38ff2e4252165e5f48713378f6053c9";
+    let cookie="_ga=GA1.2.1179491718.1700792032; _gid=GA1.2.927193133.1701390504; session=53616c7465645f5f079a808e82be0c643a8d77d734f65cb06e90051c570ee785388cda7bb9462b4d79ef3e990854b7f31ef9c6e43cc942ba71bfe505bd301b50;";
     let hv = HeaderValue::from_str(cookie).unwrap();
     headers.append(reqwest::header::COOKIE, hv);
 
@@ -17,7 +18,7 @@ fn main() {
     let mut body = String::new();
     res.read_to_string(&mut body).unwrap();
     println!("HTML: {}", &body[0..40]);
-    let f = fs::File::create(String::from("../adventOfCode/2022/days/") + day + ".txt");
+    let f = fs::File::create(String::from("../adventOfCode/") + year + "/days/" + day + ".txt");
     match f {
         Ok(file) => {
             let mut b = BufWriter::new(file);
