@@ -2,8 +2,8 @@ use reqwest::{self, header::HeaderValue};
 use std::fs;
 use std::io::{BufWriter, Read, Write};
 fn main() {
-    let year = "2022";
-    let day = "1";
+    let year = "2023";
+    let day = "2";
     let client = reqwest::blocking::Client::new();
     let base_url = String::from("https://adventofcode.com/") + year + "/day/";
     let origin_url = base_url + day + "/input";
@@ -18,7 +18,7 @@ fn main() {
     let mut body = String::new();
     res.read_to_string(&mut body).unwrap();
     println!("HTML: {}", &body[0..40]);
-    let f = fs::File::create(String::from("../adventOfCode/") + year + "/days/" + day + ".txt");
+    let f = fs::File::create(String::from("../") + year + "/day" + day + ".txt");
     match f {
         Ok(file) => {
             let mut b = BufWriter::new(file);
